@@ -42,5 +42,30 @@ public class StudentController {
       return response;
 
     }
+// write api for deleteById data present in db using
+    //DeleteMapping
+    @DeleteMapping("/delete/{id}")
+    public String DeleteAllStudent(@PathVariable int id){
+       String response= studentService.deleteAllStudent(id);
+        return response;
 
+    }
+
+    // write api for update data with the help of id
+    // using putMapping
+    @PutMapping("/update/{id}")
+    public String UpdateStudentById(@PathVariable int id,@RequestBody Student newStudentRequest){
+      String response= studentService.updateStudentById(id,newStudentRequest);
+      return response;
+
+    }
+
+    // write api for update specific field using patch method
+    // if you pass specific field like parameter then use @RequestParam
+    @PatchMapping("/updatePatch/{id}")
+    public String UpdateStudentByPatch(@PathVariable int id,@RequestParam int age){
+     String response = studentService.updateStudentByPatch(id,age);
+     return response;
+
+    }
 }

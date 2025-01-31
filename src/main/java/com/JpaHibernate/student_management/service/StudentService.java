@@ -43,7 +43,34 @@ public class StudentService {
       long response=  studentRepository.count();
       return response;
     }
-    //
+    // deleteById data  present in db using delete method
+    public String deleteAllStudent(int studentId){
+       studentRepository.deleteById(studentId);
+      return "delete successfully "+studentId;
+    }
+    // while using put - we have to send whole student object for updating operation
+    // if you want to update more than two and three fields then use put method
+    public String updateStudentById(int id,Student newStudentRequest){
+        // check id present or not
+     Student oldStudent=findStudentById(id);
+     if(oldStudent!=null){
+         studentRepository.save(newStudentRequest);
+         return "student successfully updated";
+     }
+     return "We can't update it because id is null";
+
+    }
+    //patch--> if you want to update specific field then use patch method
+    public String updateStudentByPatch(int id,int age){
+       Student oldStudent=findStudentById(id);
+       if(oldStudent!=null){
+           oldStudent.setAge(age);
+           studentRepository.save(oldStudent);
+           return "student successfully updated";
+       }
+        return "We can't update it because id is null";
+
+    }
 }
 
 
